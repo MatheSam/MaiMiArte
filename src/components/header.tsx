@@ -16,6 +16,7 @@ export function Header({ locale }: { locale: Locale }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [worksOpen, setWorksOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const menuRef = useRef<HTMLButtonElement>(null);
   const headerRef = useRef<HTMLElement>(null);
   const worksMenuRef = useRef<HTMLDivElement>(null);
@@ -39,6 +40,12 @@ export function Header({ locale }: { locale: Locale }) {
 
   useEffect(() => { setOpen(false); setWorksOpen(false); }, [pathname]);
   useEffect(() => {
+    const updateScroll = () => setScrolled(window.scrollY > 0);
+    updateScroll();
+    window.addEventListener('scroll', updateScroll, { passive: true });
+    return () => window.removeEventListener('scroll', updateScroll);
+  }, []);
+  useEffect(() => {
     const outside = (e: PointerEvent) => {
       if (!headerRef.current?.contains(e.target as Node)) setWorksOpen(false);
     };
@@ -54,7 +61,7 @@ export function Header({ locale }: { locale: Locale }) {
     </Link>
   ));
 
-  return <header id="top" ref={headerRef} className="site-header" onKeyDown={e => {
+  return <header id="top" ref={headerRef} className={`site-header${scrolled ? ' logo-compact' : ''}`} onKeyDown={e => {
     if (e.key === 'Escape') { setOpen(false); setWorksOpen(false); menuRef.current?.focus(); }
   }}>
     <Link href={`/${locale}`} className="brand" aria-label={locale === 'pt' ? 'MaiMiArte — Página principal' : 'MaiMiArte — Home'}>
