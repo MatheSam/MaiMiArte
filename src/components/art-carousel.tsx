@@ -21,6 +21,6 @@ export function ArtCarousel({ locale }: { locale: Locale }) {
         </div>)}
       </div>
     </div>
-    <div className="art-belt-caption"><p>{phrase(locale, 'Uma seleção do portfólio · imagens demonstrativas', 'A selection from the portfolio · sample images')}</p><button onClick={() => setPaused(!paused)} aria-pressed={paused}>{paused ? phrase(locale, 'Retomar movimento', 'Resume motion') : phrase(locale, 'Pausar movimento', 'Pause motion')}</button></div>
+    <div className="art-belt-caption"><p>{phrase(locale, 'Uma seleção do portfólio · imagens demonstrativas', 'A selection from the portfolio · sample images')}</p><button onClick={() => setPaused(!paused)} aria-pressed={paused} aria-label={paused ? phrase(locale, 'Retomar movimento', 'Resume motion') : phrase(locale, 'Pausar movimento', 'Pause motion')} title={paused ? phrase(locale, 'Retomar movimento', 'Resume motion') : phrase(locale, 'Pausar movimento', 'Pause motion')}><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">{paused ? <path d="M8 4.5v15l12-7.5Z"/> : <><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></>}</svg></button></div>
   </section>;
 }
