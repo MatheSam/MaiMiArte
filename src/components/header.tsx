@@ -8,7 +8,13 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { artists, type Locale } from '@/lib/content';
 import { ArtistThumbnail } from './artist-thumbnail';
-import { Palette } from './icons';
+import { Flower, Palette } from './icons';
+
+function SectionIcon({ section }: { section: 'about' | 'shop' | 'blog' }) {
+  if (section === 'about') return <Flower className="mobile-section-icon"/>;
+  if (section === 'shop') return <svg className="mobile-section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M4 8h16l-1 13H5L4 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>;
+  return <svg className="mobile-section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M4 4.5A3.5 3.5 0 0 1 7.5 3H20v17H7.5A3.5 3.5 0 0 0 4 23V4.5Z"/><path d="M4 5v18m4-15h8m-8 4h8"/></svg>;
+}
 
 export function Header({ locale }: { locale: Locale }) {
   const t = useTranslations('Navigation');
@@ -94,9 +100,9 @@ export function Header({ locale }: { locale: Locale }) {
       </div>
     </div>
     {open && <nav className="mobile-nav" id="mobile-nav" aria-label={locale === 'pt' ? 'Navegação móvel' : 'Mobile navigation'}>
-      <Link href={`/${locale}/works`} onClick={() => setOpen(false)}>{t('works')}<Palette/></Link>
+      <Link href={`/${locale}/works`} onClick={() => setOpen(false)}>{t('works')}</Link>
       <div className="mobile-artists">{artistLinks}</div>
-      {(['about', 'shop', 'blog'] as const).map(item => <Link key={item} href={`/${locale}/${item}`} onClick={() => setOpen(false)}>{t(item)}<Palette/></Link>)}
+      {(['about', 'shop', 'blog'] as const).map(item => <Link key={item} href={`/${locale}/${item}`} onClick={() => setOpen(false)}>{t(item)}<SectionIcon section={item}/></Link>)}
     </nav>}
   </header>;
 }

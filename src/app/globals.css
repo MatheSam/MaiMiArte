@@ -412,6 +412,7 @@ svg { flex-shrink: 0; }
 .mobile-nav { position: absolute; top: 8rem; left: 0; right: 0; background: var(--color-paper); max-height: calc(100dvh - 8rem); box-shadow: 0 .5rem 1rem #343b310a; }
 .mobile-artists a { display: flex; align-items: center; gap: 1rem; padding-block: .6rem; font-size: 1rem; }
 .mobile-nav>a { font-size: 2.1rem; }
+.mobile-section-icon { width: 1.5rem; height: 1.5rem; color: var(--color-olive-dark); }
 .mobile-artists a>svg { margin-left: auto; }
 .mobile-artists .artist-thumbnail { width: 3rem; }
 .hero-gallery-meta, .hero-gallery-footer { flex-wrap: wrap; row-gap: .6rem; }
